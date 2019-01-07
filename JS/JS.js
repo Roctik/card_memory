@@ -17,6 +17,11 @@ var foto_2;
 var id_foto1;
 var id_foto2;
 var salva_foto;
+var pos;
+var resto;
+var img_temp;
+var img_sola;
+var img_completa;
 var r;
 var t=0;
 var v;
@@ -27,14 +32,15 @@ var i;
 var x;
 var y;
 var z;
+/**funcion para conocer cual fue el cuadro que provoco el evento onclik**/
 function imagen(e) {
     a=e;
     t++;
     conteo_click++;
     document.getElementById('demo').innerHTML=conteo_click;
     if (flag_iniciado === 1) {
-        if (t === 2) {
-            id_foto2 = e;
+        if (t === 2) {               /** t contador de clik, si es igual a 1, se muestra la foto a la que se le dio clik y se guarda, **/
+            id_foto2 = e;            /**si es igual a 2 se muestra la segunda imagen y se hace una foto de la ella, para luego compararla con la primera**/
             foto_2=salva[id_foto2];
             document.getElementById('i'+id_foto2).src=foto_2;
             setTimeout(comparar,1000);
@@ -52,8 +58,8 @@ function organizado(){
     conteo_click=0;
     document.getElementById('pepo').innerHTML=conteo_ganados;
     document.getElementById('demo').innerHTML=conteo_click;
-    flag_iniciado=1;
-    while(y<=7){
+    flag_iniciado=1;  /**Bandera que permite que se pueda dar click solo despues de comenzar el juego**/
+    while(y<=7){      /**instrucciones para solo mostrar 8 fotos al azar de 16 en total**/
         desorden();
         y++;
     }
@@ -61,7 +67,7 @@ function organizado(){
     mostrar();
 }
 
-function desorden() {
+function desorden() {   /**Funcion para desorganizar los arreglos de fotos y posiciones de los cuadros**/
     for ( x = 0; x < miArray.length; x++)
     {
         z = Math.floor(Math.random() * imagenes.length);
@@ -78,23 +84,23 @@ function desorden() {
     }
 }
 
-function mostrar() {
-    document.getElementById("i"+miArray[0]).src=imagenes[0];
-    document.getElementById("i"+miArray[1]).src=imagenes[0];
-    document.getElementById("i"+miArray[2]).src=imagenes[1];
-    document.getElementById("i"+miArray[3]).src=imagenes[1];
-    document.getElementById("i"+miArray[4]).src=imagenes[2];
-    document.getElementById("i"+miArray[5]).src=imagenes[2];
-    document.getElementById("i"+miArray[6]).src=imagenes[3];
-    document.getElementById("i"+miArray[7]).src=imagenes[3];
-    document.getElementById("i"+miArray[8]).src=imagenes[4];
-    document.getElementById("i"+miArray[9]).src=imagenes[4];
-    document.getElementById("i"+miArray[10]).src=imagenes[5];
-    document.getElementById("i"+miArray[11]).src=imagenes[5];
-    document.getElementById("i"+miArray[12]).src=imagenes[6];
-    document.getElementById("i"+miArray[13]).src=imagenes[6];
-    document.getElementById("i"+miArray[14]).src=imagenes[7];
-    document.getElementById("i"+miArray[15]).src=imagenes[7];
+function mostrar(){ /**Funcion para mostrar las fotos en los recuadros y luego guardarlos en un arreglo**/
+    for(pos=0;pos<=15;pos++){
+        resto=pos%2;
+        if(resto===0){
+            img_temp=imagenes[pos+1];
+            img_sola=img_temp.slice(2,14);
+            img_completa="http://localhost:63342/Rompe_Cabeza"+img_sola;
+            document.getElementById('i'+miArray[pos]).src=img_completa;
+        }
+        else{
+            img_temp=imagenes[pos];
+            img_sola=img_temp.slice(2,14);
+            img_completa="http://localhost:63342/Rompe_Cabeza"+img_sola;
+            document.getElementById('i'+miArray[pos]).src=img_completa;
+        }
+    }
+
     for(r=0;r<=15;r++){
         v=document.getElementById('i'+r).src;
         salva_foto=v.slice(35,46);
