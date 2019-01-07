@@ -1,0 +1,48 @@
+#cuadro{
+    height: 295px;
+    width: 295px;
+    border: 1px solid red;
+    padding-left: 5px;
+    padding-top: 1px;
+}
+
+.fotos{
+    float: left;
+    height: 70px;
+    width: 70px;
+    border: 1px solid grey;
+}
+#general{
+    height: 500px;
+    width: 500px;
+    padding-left: 50%;
+    padding-right: 50%;
+    padding-top: 25%;
+    padding-bottom: 75%;
+
+}
+#i0,#i1,#i2,#i3,#i4,#i5,#i6,#i7,#i8,#i9,#i10,#i11,#i12,#i13,#i14,#i15{
+    height: 70px;
+    width: 70px;
+}
+
+#comenzar,#reiniciar{
+    margin: 5px;
+    display: block;
+}
+#cont,#demo{
+    display: inline-block;
+        text-decoration-style: solid;
+    text-decoration: blue;
+}
+#pepo,#puntos{
+    display: inline-block;
+    font-family: "Times New Roman",Arial,"Blackadder ITC";
+    text-shadow: grey;
+}
+#pepo{
+    margin-right: 10px;
+}
+#comenzar{
+    margin: 0px;
+}

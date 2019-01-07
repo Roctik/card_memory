@@ -1,0 +1,138 @@
+/**
+ * Created by Roberto on 04/01/2019.
+ */
+var imagenes= ["../IMG/00.jpg", "../IMG/01.jpg", "../IMG/02.jpg", "../IMG/03.jpg", "../IMG/04.jpg", "../IMG/05.jpg","../IMG/06.jpg", "../IMG/07.jpg", "../IMG/08.jpg", "../IMG/09.jpg", "../IMG/10.jpg", "../IMG/11.jpg", "../IMG/12.jpg", "../IMG/13.jpg", "../IMG/14.jpg", "../IMG/15.jpg"];
+var miArray=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+var salva=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+var inicio="../IMG/inicio.jpg";
+var igual="../IMG/Feliz.jpg";
+var tempo;
+var conteo_click=0;
+var conteo_ganados=0;
+var conteo_fin=0;
+var flag;
+var flag_iniciado;
+var foto_1;
+var foto_2;
+var id_foto1;
+var id_foto2;
+var salva_foto;
+var r;
+var t=0;
+var v;
+var a;
+var p;
+var j;
+var i;
+var x;
+var y;
+var z;
+function imagen(e) {
+    a=e;
+    t++;
+    conteo_click++;
+    document.getElementById('demo').innerHTML=conteo_click;
+    if (flag_iniciado === 1) {
+        if (t === 2) {
+            id_foto2 = e;
+            foto_2=salva[id_foto2];
+            document.getElementById('i'+id_foto2).src=foto_2;
+            setTimeout(comparar,1000);
+        }
+        else{
+            id_foto1 = e;
+            foto_1=salva[id_foto1];
+            document.getElementById('i'+id_foto1).src=foto_1;
+        }
+    }
+}
+
+function organizado(){
+    conteo_ganados=0;
+    conteo_click=0;
+    document.getElementById('pepo').innerHTML=conteo_ganados;
+    document.getElementById('demo').innerHTML=conteo_click;
+    flag_iniciado=1;
+    while(y<=7){
+        desorden();
+        y++;
+    }
+    y=0;
+    mostrar();
+}
+
+function desorden() {
+    for ( x = 0; x < miArray.length; x++)
+    {
+        z = Math.floor(Math.random() * imagenes.length);
+        tempo = miArray[x];
+        miArray[x] = miArray[z];
+        miArray[z] = tempo;
+    }
+    for(i=0;i<16;i++)
+    {
+        j= Math.floor(Math.random() * imagenes.length);
+        flag=imagenes[i];
+        imagenes[i]=imagenes[j];
+        imagenes[j]=flag;
+    }
+}
+
+function mostrar() {
+    document.getElementById("i"+miArray[0]).src=imagenes[0];
+    document.getElementById("i"+miArray[1]).src=imagenes[0];
+    document.getElementById("i"+miArray[2]).src=imagenes[1];
+    document.getElementById("i"+miArray[3]).src=imagenes[1];
+    document.getElementById("i"+miArray[4]).src=imagenes[2];
+    document.getElementById("i"+miArray[5]).src=imagenes[2];
+    document.getElementById("i"+miArray[6]).src=imagenes[3];
+    document.getElementById("i"+miArray[7]).src=imagenes[3];
+    document.getElementById("i"+miArray[8]).src=imagenes[4];
+    document.getElementById("i"+miArray[9]).src=imagenes[4];
+    document.getElementById("i"+miArray[10]).src=imagenes[5];
+    document.getElementById("i"+miArray[11]).src=imagenes[5];
+    document.getElementById("i"+miArray[12]).src=imagenes[6];
+    document.getElementById("i"+miArray[13]).src=imagenes[6];
+    document.getElementById("i"+miArray[14]).src=imagenes[7];
+    document.getElementById("i"+miArray[15]).src=imagenes[7];
+    for(r=0;r<=15;r++){
+        v=document.getElementById('i'+r).src;
+        salva_foto=v.slice(35,46);
+        salva[r]='..'+salva_foto;
+    }
+    setTimeout(mostrar_inicio,3000);
+}
+
+function mostrar_inicio() {
+    for(p=0;p<=15;p++){
+        document.getElementById('i'+p).src=inicio;
+    }
+}
+
+function comparar() {
+    if(foto_1===foto_2){
+        conteo_ganados++;
+        conteo_fin++;
+        document.getElementById('pepo').innerHTML=conteo_ganados;
+        document.getElementById('i'+id_foto1).src=igual;
+        document.getElementById('i'+id_foto2).src=igual;
+        t=0;
+        if(conteo_fin===8){
+            window.alert("Ha ganado!!!"+'\n'+ "Su puntuación es de "+conteo_ganados);
+            conteo_fin=0;
+        }
+    }
+    if(foto_1!=foto_2) {
+        conteo_ganados--;
+        document.getElementById('pepo').innerHTML=conteo_ganados;
+        document.getElementById('i' + id_foto2).src = inicio;
+        document.getElementById('i' + id_foto1).src = inicio;
+        t = 0;
+    }
+}
+
+
+
+
+
+
